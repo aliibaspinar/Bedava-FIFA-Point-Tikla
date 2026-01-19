@@ -1,0 +1,229 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #02040a;
+  color: #f5f5f5;
+  overflow: hidden;
+}
+
+/* Arka plan fotoğrafı: lütfen gurkan-burune görselini bu proje klasörüne kopyalayıp
+   ismini 'gurkan-burune.jpg' yapın veya aşağıdaki url'yi ona göre güncelleyin.
+   Bu arka plan, küçük kutular halinde tüm ekrana döşenecek. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("gurkan-burune.jpeg");
+  /* Fotoğrafı küçük kareler olarak her yere döşe */
+  background-size: 140px 140px; /* kutu boyutunu istersen buradan büyüt/küçült */
+  background-repeat: repeat;
+  background-position: 0 0;
+  /* Fotoğraf net görünsün diye çok az karartma */
+  filter: brightness(0.9);
+  z-index: -2;
+}
+
+/* Karanlık, sarı-lacivert overlay */
+#overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Arka plan fotoğrafını çok örtmesin diye overlay'i incelttim */
+  background: radial-gradient(circle at top, rgba(255, 215, 0, 0.18), transparent 55%),
+    radial-gradient(circle at bottom, rgba(0, 51, 102, 0.4), rgba(0, 0, 0, 0.6));
+}
+
+.alert-box {
+  min-width: 320px;
+  max-width: 520px;
+  padding: 2.5rem 2.75rem;
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(4, 10, 25, 0.96), rgba(0, 0, 0, 0.96));
+  border: 2px solid rgba(255, 215, 0, 0.6);
+  box-shadow:
+    0 0 25px rgba(0, 0, 0, 0.9),
+    0 0 40px rgba(0, 14, 60, 0.9);
+  text-align: center;
+  color: #fdfdfd;
+  position: relative;
+  /* Son uyarıda kaçan buton için dışına taşmaya izin ver */
+  overflow: visible;
+}
+
+.alert-box::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(circle at top left, rgba(255, 215, 0, 0.18), transparent 55%);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.alert-title {
+  font-size: 1.4rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #ffd700;
+  margin-bottom: 1.4rem;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.9);
+}
+
+.alert-text {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #f8f8f8;
+  white-space: pre-line;
+  margin-bottom: 2.3rem;
+  padding: 0 0.25rem;
+}
+
+.alert-box #alert-image {
+  display: none;
+  margin: 0 auto 1.6rem;
+  max-width: 220px;
+  width: 70%;
+  border-radius: 12px;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.8),
+    0 10px 24px rgba(0, 0, 0, 0.9);
+}
+
+.buttons {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+button#confirm-btn,
+button#reject-btn,
+button#next-btn {
+  appearance: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0.9rem 2.6rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.85), 0 10px 24px rgba(0, 0, 0, 0.85);
+  transition:
+    transform 0.1s ease-out,
+    box-shadow 0.1s ease-out,
+    filter 0.1s ease-out;
+}
+
+/* maymun.html'deki butonlar da aynı görünsün */
+#reveal-code-btn {
+  background: linear-gradient(135deg, #ffd700, #ffb300);
+  color: #001133;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.85),
+    0 10px 24px rgba(0, 0, 0, 0.85),
+    0 0 20px rgba(255, 215, 0, 0.45);
+}
+
+.fake-link {
+  display: inline-block;
+  margin-top: 1.1rem;
+  color: #ffd700;
+  text-decoration: underline;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+}
+
+/* Son uyarıda sadece süs olsun diye küçük görünen Onaylıyorum */
+button#confirm-btn.tiny {
+  padding: 0.35rem 0.9rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+}
+
+button#confirm-btn {
+  background: linear-gradient(135deg, #ffd700, #ffb300);
+  color: #001133;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.85),
+    0 10px 24px rgba(0, 0, 0, 0.85),
+    0 0 20px rgba(255, 215, 0, 0.45);
+}
+
+button#reject-btn {
+  background: linear-gradient(135deg, #1b1f30, #101320);
+  color: #f5f5f5;
+}
+
+button#next-btn {
+  display: none;
+  background: linear-gradient(135deg, #ffd700, #ffb300);
+  color: #001133;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.85),
+    0 10px 24px rgba(0, 0, 0, 0.85),
+    0 0 20px rgba(255, 215, 0, 0.45);
+}
+
+button#confirm-btn:hover,
+button#reject-btn:hover,
+button#next-btn:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.85),
+    0 14px 30px rgba(0, 0, 0, 0.95),
+    0 0 26px rgba(255, 215, 0, 0.65);
+  filter: brightness(1.05);
+}
+
+button#confirm-btn:active,
+button#reject-btn:active,
+button#next-btn:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.9),
+    0 6px 14px rgba(0, 0, 0, 0.9);
+}
+
+button:disabled {
+  cursor: default;
+  filter: grayscale(0.2) brightness(0.9);
+  opacity: 0.85;
+  transform: none !important;
+}
+
+/* Küçük ekran uyumu */
+@media (max-width: 480px) {
+  .alert-box {
+    margin: 1.5rem;
+    padding: 1.9rem 1.6rem;
+  }
+
+  .alert-title {
+    font-size: 1.15rem;
+    letter-spacing: 0.18em;
+  }
+
+  .alert-text {
+    font-size: 0.98rem;
+  }
+}
+
+
